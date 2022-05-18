@@ -40,6 +40,19 @@ router.patch("/:id", function(req, res, next){
     const body = req.body;
     const id = req.params.id;
 
+    try{
+        const todo = controller.getOne(id);
+        try{
+            Object.assign(todo, body);
+            const row = controller.patch(id, todo.text, todo.date, todo.status);
+            res.send(todo);
+        }catch (e){
+            alert(e);
+        }
+    }catch (e){
+        alert(e);
+    }
+    /*
     if(id) {
         const todo = controller.getOne(id);
         if (todo) {
@@ -53,7 +66,7 @@ router.patch("/:id", function(req, res, next){
         }
     }else{
         res.sendStatus(404);
-    }
+    }*/
 });
 router.delete('/:id', function(req, res, next) {
     const id = req.params.id

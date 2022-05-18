@@ -20,8 +20,6 @@ export default {
     //this.newtodo.tasks = await res.json();
   },
 
-
-
   methods: {
     async addTodo() {
       if (this.newtodo.text.length === 0) return;
@@ -38,8 +36,6 @@ export default {
               }
           )
           await this.getData();
-          //const res =await fetch('http://localhost:3000/todos', {method: 'GET'});
-          //this.newtodo.tasks = await res.json();
           //alert("Saved!");
         } catch (e) {
           alert(e);
@@ -53,7 +49,7 @@ export default {
       this.newtodo.tasks = await res.json();
     },
     /*
-    async getOnlyTodo(status){
+    async getOnly(status){
       try {
         //console.log(this.newtodo.text);
         this.shows = status;
@@ -84,7 +80,6 @@ export default {
   <div class="container shadow-lg px-5 py-5 rounded-3">
     <h1 class="mb-5">My To Do List</h1>
 
-    <!-- <form> -->
     <div class="d-flex mb-5">
       <input
           v-model="newtodo.text"
@@ -102,13 +97,13 @@ export default {
     <!--
     <div class="modal-footer ">
       <div class="form-check">
-        <input  @click="getOnlyTodo(1)" class="form-check-input bg-danger border-danger btn-outline-danger" type="radio" name="flexRadioDefault" id="onlytodo" value=1 v-model="shows">
+        <input  @click="getOnly(1)" class="form-check-input bg-danger border-danger btn-outline-danger" type="radio" name="flexRadioDefault" id="onlytodo" value=1 v-model="shows">
         <label class="form-check-label text-danger" for="onlytodo">
           Show only to do
         </label>
       </div>
       <div class="form-check">
-        <input @click="getOnlyTodo(2)" class="form-check-input bg-warning border-warning btn-outline-warning" type="radio" name="flexRadioDefault" id="onlyongoing" value=2 v-model="shows">
+        <input @click="getOnly(2)" class="form-check-input bg-warning border-warning btn-outline-warning" type="radio" name="flexRadioDefault" id="onlyongoing" value=2 v-model="shows">
         <label class="form-check-label text-warning" for="onlyongoing">
           Show only on going
         </label>

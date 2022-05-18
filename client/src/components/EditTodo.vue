@@ -2,18 +2,19 @@
   <div class="card">
     <div class="card-body">
       <div class="card-title">
-        <h3>Edit you To Do task</h3>
+          <h3>Edit you To Do task</h3>
       </div>
       <hr/>
       <div class="card-text">
 
-        <div class="row mb-3 align-items-center">
+        <div class="row mb-3 "><!--align-items-center-->
           <div class="col-8">
             <label class="form-label">Your task</label>
             <textarea v-model="task.text" class="form-control" rows="5"></textarea>
           </div>
 
-          <div class="col-4 ">
+          <div class="col-2 ">
+            <label class="form-label">Task status</label>
             <div class="form-check">
               <input class="form-check-input bg-danger border-danger btn-outline-danger" type="radio" name="flexRadioDefault" id="stodo" value=1 v-model="task.status">
               <label class="form-check-label text-danger" for="stodo">
@@ -33,6 +34,10 @@
               </label>
             </div>
 
+          </div>
+          <div class="col-2 ">
+            <label class="form-label g-5">Date of creating</label>
+            <p class="form-label fw-bold">{{formattedDate}}</p>
           </div>
         </div>
 
@@ -62,6 +67,11 @@ export default {
     const id = this.$route.params.id;
     this.task = await this.getData(id);
   },
+  computed: {
+    formattedDate() {
+      return new Date(this.task.date).toLocaleDateString()
+    }
+  },
   methods: {
     async getData(id) {
       const res = await fetch(`http://localhost:3000/todos/${id}`, {method: 'GET'});
@@ -81,18 +91,14 @@ export default {
                 }
               }
           )
-          //const res =await fetch('http://localhost:3000/todos', {method: 'GET'});
-          //this.newtodo.tasks = await res.json();
           await this.$router.push('/');
           //alert("Saved!");
         } catch (e) {
           alert(e);
         }
-        //this.newtodo.text = "";
       }
     },
     async deleteTodo(id) {
-
         try {
           fetch(`http://localhost:3000/todos/${id}`, {method: 'Delete'});
           await this.$router.push('/');
@@ -100,10 +106,9 @@ export default {
         } catch (e) {
           alert(e);
         }
-        //this.newtodo.text = "";
-     // }
     }
-  },
+
+  }
 
 
 }

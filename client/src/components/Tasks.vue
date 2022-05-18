@@ -1,9 +1,6 @@
 <template>
   <div class="card">
     <div class="row g-0">
-
-
-
       <div class="col-2">
         <div class="offset-1 d-flex justify-content-start align-items-center ">
           <div
@@ -26,8 +23,6 @@
           </div>
         </div>
       </div>
-
-
 
         <div class="col-sm-10"> <!--col-xl-16 col-lg-8-->
           <div class="card-body">
@@ -84,7 +79,6 @@ export default {
             {
               method: 'PATCH',
               body: JSON.stringify(res),
-              //params: JSON.stringify(id),
               headers: {
                 'Content-type': 'application/json'
               }
