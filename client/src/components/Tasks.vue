@@ -49,16 +49,6 @@
 <script>
 export default {
   name: "Tasks",
-  /*data() {
-    return {
-      todo: {
-        id: null,
-        date: null,
-        text: null,
-        status: null
-      }
-    }
-  },*/
   props: {
     id: Number,
     date: String,
@@ -76,27 +66,36 @@ export default {
       if (status == 2) return 'on going';
       if (status == 3) return 'finished';
     },
+    getData(){
+      this.$emit("getData");
+    },
     async changeStatus(id){
       try {
         //console.log(this.newtodo.text)
-        this.props.status+=1;
+        const row =await fetch(`http://localhost:3000/todos/${id}`, {method: 'GET'});
+        console.log(row)
+        //res.status+=1;
+        const res = await row.json();
+
+        if(res.status==3) res.status = 1;
+        else res.status += 1;
+
         await fetch(`http://localhost:3000/todos/${id}`,
             {
               method: 'PATCH',
-              body: JSON.stringify(this.props),
-              params: JSON.stringify(id),
+              body: JSON.stringify(res),
+              //params: JSON.stringify(id),
               headers: {
                 'Content-type': 'application/json'
               }
             }
         )
-        //const res =await fetch('http://localhost:3000/todos/', {method: 'GET'});
-        //this.newtodo.tasks = await res.json();
-        alert("Saved!");
+        this.getData();
       } catch (e) {
         alert(e);
       }
     }
+
   }
 
 }
